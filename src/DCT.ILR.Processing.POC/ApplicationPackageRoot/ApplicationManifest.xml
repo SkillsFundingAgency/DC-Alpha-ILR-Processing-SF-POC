@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="DCT.ILR.Processing.POCType" ApplicationTypeVersion="1.0.2" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Parameters>
+    <!--<Parameter Name="DCT.ILR.ValidationService.Client_InstanceCount" DefaultValue="-1" />-->
+    <!--<Parameter Name="DCT.ILR.ValidationSevice.WebClient_InstanceCount" DefaultValue="-1" />-->
+    <Parameter Name="DCT.ILR.FundingCalcService_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="DCT.ILR.Data_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="DCT.ILR.Data_PartitionCount" DefaultValue="10" />
+    <Parameter Name="DCT.ILR.Data_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="DCT.ILR.ValidationServiceStateless_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="DCT.ILR.ValidationService.TestWebClient_InstanceCount" DefaultValue="-1" />
+    <!--<Parameter Name="DCT.ILR.VadationServiceStateful_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="DCT.ILR.VadationServiceStateful_PartitionCount" DefaultValue="1" />
+    <Parameter Name="DCT.ILR.VadationServiceStateful_TargetReplicaSetSize" DefaultValue="3" />-->
+    <Parameter Name="LearnerActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="LearnerActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="LearnerActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="QueueName" DefaultValue="TestQueueinParam" />
+    <Parameter Name="ServiceBusConnectionString" DefaultValue="Endpoint##ServiceBusEndPoint##;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=##ServiceBusKey##" />
+    <Parameter Name="TopicName" DefaultValue="##ServiceBusTopicName##" />
+    <Parameter Name="FuncCalcSubscriptionName" DefaultValue="FundingCalc-dev" />
+    <Parameter Name="ApplicationInsightsKey" DefaultValue="##AppInsighKey##" />
+    <Parameter Name="ULNLoadDataSubscriptionName" DefaultValue="ULNDataLoad-dev" />
+    <Parameter Name="ULNGetTestSubscriptionName" DefaultValue="ULNDataGet-dev" />
+    <Parameter Name="ALBActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="ALBActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ALBActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="MaxMessageSize" DefaultValue="1073741824" />
+    <Parameter Name="DataServicePlacementConstraints" DefaultValue="" />
+    <Parameter Name="DefaultServicePlacementConstraints" DefaultValue="" />
+    <Parameter Name="MaxReplicationMessageSize" DefaultValue="1073741824" />
+    <Parameter Name="MaxSecondaryReplicationQueueSize" DefaultValue="65536" />
+    <Parameter Name="BatchAcknowledgementInterval" DefaultValue="100" />
+    <Parameter Name="FundingCalcSqlFilterValue" DefaultValue="fundingcalc-dev" />
+  </Parameters>
+
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DCT.ILR.FundingCalcService.ALBActorPkg" ServiceManifestVersion="1.0.0" />
+  </ServiceManifestImport>
+
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DCT.ILR.FundingCalcServicePkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ConfigurationSection">
+            <Parameter Name="TopicName" Value="[TopicName]" />
+            <Parameter Name="FuncCalcSubscriptionName" Value="[FuncCalcSubscriptionName]" />
+            <Parameter Name="ServiceBusConnectionString" Value="[ServiceBusConnectionString]" />
+          </Section>
+          <Section Name="DataTransportSettings">
+            <Parameter Name="MaxMessageSize" Value="[MaxMessageSize]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DCT.ILR.DataPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ConfigurationSection">
+            <Parameter Name="ApplicationInsightsKey" Value="[ApplicationInsightsKey]" />
+          </Section>
+          <Section Name="DataTransportSettings">
+            <Parameter Name="MaxMessageSize" Value="[MaxMessageSize]" />
+          </Section>
+          <Section Name="ReplicatorConfig">
+            <Parameter Name="MaxReplicationMessageSize" Value="[MaxReplicationMessageSize]" />
+            <Parameter Name="MaxSecondaryReplicationQueueSize" Value="[MaxSecondaryReplicationQueueSize]" />
+          </Section>
+          <Section Name="ServiceBusSettings">
+            <Parameter Name="TopicName" Value="[TopicName]" />
+            <Parameter Name="ServiceBusConnectionString" Value="[ServiceBusConnectionString]" />
+            <Parameter Name="ULNLoadDataSubscriptionName" Value="[ULNLoadDataSubscriptionName]" />
+            <Parameter Name="ULNGetTestSubscriptionName" Value="[ULNGetTestSubscriptionName]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DCT.ILR.ValidationServiceStatelessPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBusSettings">
+            <Parameter Name="QueueName" Value="[QueueName]" />
+            <Parameter Name="ServiceBusConnectionString" Value="[ServiceBusConnectionString]" />
+            <Parameter Name="TopicName" Value="[TopicName]" />
+            <Parameter Name="FundingCalcSqlFilterValue" Value="[FundingCalcSqlFilterValue]" />
+          </Section>
+          <Section Name="ConfigurationSection">
+            <Parameter Name="ApplicationInsightsKey" Value="[ApplicationInsightsKey]" />
+          </Section>
+          <Section Name="DataTransportSettings">
+            <Parameter Name="MaxMessageSize" Value="[MaxMessageSize]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+    <EnvironmentOverrides CodePackageRef="Code">
+      <EnvironmentVariable Name="QueueName" Value="[QueueName]" />
+    </EnvironmentOverrides>
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DCT.ILR.ValidationService.TestWebClientPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBusQueue">
+            <Parameter Name="QueueName" Value="[QueueName]" />
+            <Parameter Name="ServiceBusConnectionString" Value="[ServiceBusConnectionString]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DCT.ILR.ValidationService.LearnerActorPkg" ServiceManifestVersion="1.0.0" />
+  </ServiceManifestImport>
+  <DefaultServices>
+
+    <Service Name="DCT.ILR.FundingCalcService" ServicePackageActivationMode="ExclusiveProcess">
+      <StatelessService ServiceTypeName="DCT.ILR.FundingCalcServiceType" InstanceCount="[DCT.ILR.FundingCalcService_InstanceCount]">
+        <SingletonPartition />
+        <PlacementConstraints>[DefaultServicePlacementConstraints]</PlacementConstraints>
+      </StatelessService>
+    </Service>
+    <Service Name="DCT.ILR.Data" ServicePackageActivationMode="ExclusiveProcess">
+      <StatefulService ServiceTypeName="DCT.ILR.DataType" TargetReplicaSetSize="[DCT.ILR.Data_TargetReplicaSetSize]" MinReplicaSetSize="[DCT.ILR.Data_MinReplicaSetSize]">
+         <UniformInt64Partition PartitionCount="[DCT.ILR.Data_PartitionCount]" LowKey="0" HighKey="10" />
+        <PlacementConstraints>[DataServicePlacementConstraints]</PlacementConstraints>
+      </StatefulService>
+    </Service>
+    <Service Name="DCT.ILR.ValidationServiceStateless" ServicePackageActivationMode="ExclusiveProcess">
+      <StatelessService ServiceTypeName="DCT.ILR.ValidationServiceStatelessType" InstanceCount="[DCT.ILR.ValidationServiceStateless_InstanceCount]">
+        <SingletonPartition />
+        <PlacementConstraints>[DefaultServicePlacementConstraints]</PlacementConstraints>
+      </StatelessService>
+    </Service>
+    <Service Name="DCT.ILR.ValidationService.TestWebClient" ServicePackageActivationMode="ExclusiveProcess">
+      <StatelessService ServiceTypeName="DCT.ILR.ValidationService.TestWebClientType" InstanceCount="[DCT.ILR.ValidationService.TestWebClient_InstanceCount]">
+        <SingletonPartition />
+        <PlacementConstraints>[DefaultServicePlacementConstraints]</PlacementConstraints>
+      </StatelessService>
+    </Service>
+
+    <Service Name="LearnerActorService" GeneratedIdRef="15804e61-0bcd-41a9-8d77-b8fe268c26ab|Volatile">
+      <StatefulService ServiceTypeName="LearnerActorServiceType" TargetReplicaSetSize="[LearnerActorService_TargetReplicaSetSize]" MinReplicaSetSize="[LearnerActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[LearnerActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+        <PlacementConstraints>[DefaultServicePlacementConstraints]</PlacementConstraints>
+      </StatefulService>
+    </Service>
+    <Service Name="ALBActorService" GeneratedIdRef="685512ae-366c-44f7-bbc5-6415b0f7823b|Volatile">
+      <StatefulService ServiceTypeName="ALBActorServiceType" TargetReplicaSetSize="[ALBActorService_TargetReplicaSetSize]" MinReplicaSetSize="[ALBActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[ALBActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+        <PlacementConstraints>[DefaultServicePlacementConstraints]</PlacementConstraints>
+      </StatefulService>
+    </Service>
+  </DefaultServices>
+</ApplicationManifest>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <!-- This is used by the StateManager's replicator. -->
+  <Section Name="ReplicatorConfig">
+    <Parameter Name="ReplicatorEndpoint" Value="ReplicatorEndpoint" />
+    <Parameter Name="MaxReplicationMessageSize" Value="1073741824"  />
+    <Parameter Name="MaxSecondaryReplicationQueueSize" Value="65536"  />
+  </Section>
+  <!-- This is used for securing StateManager's replication traffic. -->
+  <Section Name="ReplicatorSecurityConfig" />
+
+  <Section Name="ServiceBusSettings">
+    <Parameter Name="TopicName" Value="" />
+    <Parameter Name="ServiceBusConnectionString" Value="" />
+    <Parameter Name="ULNLoadDataSubscriptionName" Value="" />
+    <Parameter Name="ULNGetTestSubscriptionName" Value="" />
+  </Section>
+
+  <!-- Add your custom configuration sections and parameters here. -->
+  <Section Name="ConfigurationSection">
+    <Parameter Name="ApplicationInsightsKey" Value="" />
+  </Section>
+ 
+
+  <Section Name="DataTransportSettings">
+    <Parameter Name="MaxMessageSize" Value="1073741824" MustOverride="true" />
+    <Parameter Name="SecurityCredentialsType" Value="None" />
+    <Parameter Name="CertificateFindType" Value="" />
+    <Parameter Name="CertificateFindValue" Value="" />
+    <Parameter Name="CertificateRemoteThumbprints" Value="" />
+    <Parameter Name="CertificateStoreLocation" Value="" />
+    <Parameter Name="CertificateStoreName" Value="" />
+    <Parameter Name="CertificateProtectionLevel" Value="" />
+    <Parameter Name="CertificateRemoteCommonNames" Value="" />
+  </Section>
+</Settings>

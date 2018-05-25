@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Confirmation";
+    var correlationId = ViewData["CorrelationId"];
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+
+        <div class="govuk-box-highlight">
+            <h1 class="heading-xlarge">
+                ILR file upload complete
+            </h1>
+            <p>
+                The ILR file for <span class="bold">
+                    Return period 6
+
+                    (R06)
+                </span> is now being processed.
+            </p>
+
+            <p>Estimated processing time is currently <span class="bold">around 3 hours</span>.</p>
+
+            <p>
+                Your reference number is <br>
+                <strong class="bold">@correlationId</strong>
+            </p>
+        </div>
+
+        <p>
+            Please click this link to view the status of your submission: @Html.ActionLink("link", "Status", "Home", new { correlationId })
+        </p>
+
+        <h2 class="heading-medium">
+            What happens next?
+        </h2>
+        <p>
+            You will receive an email notification once your file has been processed.
+        </p>
+        <p>
+            If any warnings or errors are found in the data you submitted they will be listed in a report file which can be downloaded once your submission has been processed.
+        </p>
+    </div>
+</div>
+   
+

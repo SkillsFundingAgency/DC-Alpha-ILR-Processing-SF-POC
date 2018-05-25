@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="fabric:/DCT.ILR.Processing.POC" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Parameters>
+    <Parameter Name="DCT.ILR.FundingCalcService_InstanceCount" Value="-1" />
+    <Parameter Name="DCT.ILR.Data_PartitionCount" Value="10" />
+    <Parameter Name="DCT.ILR.Data_MinReplicaSetSize" Value="3" />
+    <Parameter Name="DCT.ILR.Data_TargetReplicaSetSize" Value="3" />
+    <Parameter Name="DCT.ILR.ValidationServiceStateless_InstanceCount" Value="-1" />
+    <Parameter Name="DCT.ILR.ValidationService.TestWebClient_InstanceCount" Value="-1" />
+    <Parameter Name="QueueName" Value="##QueueName##" />
+    <Parameter Name="ServiceBusConnectionString" Value="##ServiceBusConnectionString##" />
+    <Parameter Name="FuncCalcSubscriptionName" Value="##FuncCalcSubscriptionName##" />
+    <Parameter Name="DataServicePlacementConstraints" Value="(NodeHostName == DataServices)" />
+    <Parameter Name="DefaultServicePlacementConstraints" Value="(NodeHostName == DefaultHosts)" />
+    <Parameter Name="FundingCalcSqlFilterValue" Value="##FundingCalcSqlFilterValue##" />
+  </Parameters>
+</Application>

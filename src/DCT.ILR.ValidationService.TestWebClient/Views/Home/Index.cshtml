@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    ViewData["secondaryHeading"] = "The New Hub";
+//    ViewData["pageHeading"] = "ILR Submission";
+}
+
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <div class="column-highlight">
+            <h1 class="heading-xlarge">
+                Submit an <abbr title="Individualised Learner Record">ILR</abbr> file
+            </h1>
+            <p class="lede">You can use this service to submit an ILR file for the current Return period.</p>
+            <p>Before submitting a file make sure:</p>
+            <ul class="list list-bullet">
+                <li>Learner data should be entered correctly</li>
+                <li>ILR files must be saved in the <abbr title="Extensible Markup Language">XML</abbr> file format</li>
+            </ul>
+            <div class="text">
+                <div class="column-highlight">
+                    <form asp-controller="Home" asp-action="SubmitILR" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="form-label" for="file-input">
+                                Upload a file
+                            </label>
+                            <input type="file" name="file" id="file-input">
+
+
+                            <br />
+                            <br />
+
+                            <fieldset>
+
+                                <div class="multiple-choice">
+                                    <input id="IsShredAndProcess" name="IsShredAndProcess" type="checkbox" value="true">
+                                    <label for="checkbox-telephone-number">Shred file and process for Validation</label>
+                                </div>
+                            </fieldset>
+                            <br />
+
+                            <input class="button" type="submit" value="Submit">
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column-one-third">
+        <aside class="govuk-related-items">
+            <h2 class="heading-medium">Return period 6
+
+                (R06)
+                closes on Tuesday 6th February 2018 at 6.00 PM</h2>
+            <!-- <h2 class="heading-medium">Return period 6 (R06)</h2> -->
+            <div class="data">
+                <span class="data-item bold-large">15 days</span>
+                <span class="data-item font-small">until close</span>
+            </div>
+
+            <!-- <div class="panel panel-border-wide">
+                <p class="font-small">R06 ends on Tuesday 6th February 2018 at 6.00 PM</p>
+            </div> -->
+
+            <a href="/version-2/ilr-dates">See all Return dates</a>
+        </aside>
+    </div>
+  
+</div>

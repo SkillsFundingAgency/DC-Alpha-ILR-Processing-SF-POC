@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PublishProfile xmlns="http://schemas.microsoft.com/2015/05/fabrictools">
+  <ClusterConnectionParameters ConnectionEndpoint="__ClusterConnectionParameters.ConnectionEndpoint__"
+                               X509Credential="__ClusterConnectionParameters.X509Credential__"
+                               ServerCertThumbprint="__ClusterConnectionParameters.ServerCertThumbprint__"
+                               FindType="__ClusterConnectionParameters.FindType__"
+                               FindValue="__ClusterConnectionParameters.FindValue__"
+                               StoreLocation="__ClusterConnectionParameters.StoreLocation__"
+                               StoreName="__ClusterConnectionParameters.StoreName__"
+                />
+  <ApplicationParameterFile Path="..\ApplicationParameters\Cloud.xml" />
+  <CopyPackageParameters CompressPackage="true" />
+</PublishProfile>

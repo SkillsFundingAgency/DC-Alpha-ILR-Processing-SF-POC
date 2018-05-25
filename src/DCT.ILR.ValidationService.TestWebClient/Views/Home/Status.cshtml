@@ -1,0 +1,54 @@
+﻿@model ResultsModel
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["secondaryHeading"] = "The New Hub";
+    ViewData["pageHeading"] = "ILR Processing Status";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <div class="column-highlight">
+            <h2 class="bold-medium">Validation Results Status : @(Model.ValidationResults == null ? "Processing" : "Completed")  </h2>
+            <div class="text">
+                <div class="column-highlight"> 
+                    @if (Model.ValidationResults == null)
+                    {
+                        <div>Your ILR is still being processed, thank you for your patience. Try refreshing this page after few seconds.</div>
+
+                    }
+                    else
+                    {
+
+                        foreach (var item in Model.ValidationResults)
+                        {
+                            <div>@item</div>
+                        }
+                    }
+                </div>
+            </div>
+        </div> 
+        <br/>
+        <div class="column-highlight">
+            <h2 class="bold-medium">Funding Calc Results Status : @(Model.FundingCalcResults == null ? "Processing" : "Completed")  </h2>
+            <div class="text">
+                <div class="column-highlight"> 
+                    @if (Model.FundingCalcResults == null)
+                    {
+                        <div>Funding Calc is still being processed. Please wait ...</div>
+
+                    }
+                    else
+                    {
+
+                        foreach (var item in Model.FundingCalcResults)
+                        {
+                            <div>@item</div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
